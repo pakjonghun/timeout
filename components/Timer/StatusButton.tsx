@@ -1,14 +1,16 @@
 import { memo, useCallback } from "react";
 import { NextPage } from "next";
 import { useAppDispatch, useAppSelector } from "@libs/client/useRedux";
-import { AnimatePresence, motion } from "framer-motion";
+import { joinStyleClass } from "@libs/client/utils";
 import { setIsStatusChanging } from "@store/reducer/workTime";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface props {
   onClickTimerButton: () => void;
+  isLoading: boolean;
 }
 
-const StatusButton: NextPage<props> = ({ onClickTimerButton }) => {
+const StatusButton: NextPage<props> = ({ isLoading, onClickTimerButton }) => {
   const dispatch = useAppDispatch();
   const timerStatus = useAppSelector((state) => state.workTime.timerStatus);
 
@@ -21,8 +23,12 @@ const StatusButton: NextPage<props> = ({ onClickTimerButton }) => {
 
   return (
     <button
+      disabled={isLoading}
       onClick={onClickTimerButton}
-      className="relative w-36 aspect-square text-green-50 font-medium text-2xl bg-green-700 rounded-full scale"
+      className={joinStyleClass(
+        "relative w-36 aspect-square text-green-50 font-medium text-2xl bg-green-700 rounded-full scale",
+        isLoading ? "pointer-events-none opacity-50" : ""
+      )}
     >
       <AnimatePresence
         initial={false}

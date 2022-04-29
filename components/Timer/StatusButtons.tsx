@@ -9,7 +9,8 @@ import { toast } from "react-toastify";
 const StatusButtons = () => {
   const { onShowModal } = useModal("confirmTimer");
   const timeoutStatus = useAppSelector((state) => state.workTime.timerStatus);
-  const [startWorkMutation, { isError, data }] = useStartWorkMutation();
+  const [startWorkMutation, { isError, data, isLoading }] =
+    useStartWorkMutation();
 
   useEffect(() => {
     if (isError) toast.error("초과근무 시작을 실패했습니다..");
@@ -28,7 +29,10 @@ const StatusButtons = () => {
         timeoutStatus === "end" ? "-translate-y-16" : ""
       )}
     >
-      <StatusButton onClickTimerButton={onClickTimerButton} />
+      <StatusButton
+        isLoading={isLoading}
+        onClickTimerButton={onClickTimerButton}
+      />
     </div>
   );
 };
