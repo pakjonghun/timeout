@@ -23,8 +23,4 @@ const withCookie = (func: any) => {
   return withIronSessionApiRoute(func, option);
 };
 
-export const withSSRCookie = (func: any) => {
-  return withIronSessionSsr(func, option);
-};
-
 export default withCookie;
