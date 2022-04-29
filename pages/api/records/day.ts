@@ -25,10 +25,19 @@ const handler = async (
     keyWord,
     page,
     day = "desc",
-    end,
-    start,
-    duration,
   } = req.query as GetRecordByDayRequest;
+
+  let beforeDate = startDate;
+  let afterDate = endDate;
+
+  if (startDate && endDate) {
+    const startTime = new Date(startDate).getTime();
+    const endTime = new Date(endDate).getTime();
+    if (startTime > endTime) {
+      beforeDate = endDate;
+      afterDate = startDate;
+    }
+  }
 
   if (!page) return res.status(400).json({ success: false });
 
@@ -54,14 +63,14 @@ const handler = async (
       user: {
         name: keyWord,
       },
-      ...(startDate && {
+      ...(beforeDate && {
         createdAt: {
-          gte: new Date(startDate),
+          gte: new Date(beforeDate),
         },
       }),
-      ...(endDate && {
+      ...(afterDate && {
         createdAt: {
-          lte: addDays(new Date(endDate), 1),
+          lte: addDays(new Date(afterDate), 1),
         },
       }),
       ...(OR.length && { OR }),

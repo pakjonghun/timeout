@@ -36,7 +36,6 @@ const workTime = api.injectEndpoints({
       }),
       async onQueryStarted({ start }, { dispatch, queryFulfilled }) {
         dispatch(startTimer());
-
         dispatch(
           setStartTime({
             id: 6001244232334,
@@ -63,7 +62,6 @@ const workTime = api.injectEndpoints({
           const {
             data: { workTime },
           } = await queryFulfilled;
-
           if (workTime) {
             dispatch(
               setStartTime({

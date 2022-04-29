@@ -1,3 +1,4 @@
+import { getCurDateInServer } from "./../../libs/server/utils";
 import { EndWorkRequest as BodyType } from "./../../libs/client/types/dataTypes";
 import { NextApiRequest, NextApiResponse } from "next";
 import client from "@libs/server/client";
@@ -23,6 +24,7 @@ const handler = async (
           status: "WORKING",
         },
       });
+      const curDate = getCurDateInServer(start);
 
       const workTime = await client.workTimes.create({
         data: {
@@ -31,8 +33,8 @@ const handler = async (
               id: req.session.user!.id,
             },
           },
-          start: new Date(start),
-          day: format(new Date(), "yyyy-MM-dd"),
+          start: curDate,
+          day: format(curDate, "yyyy-MM-dd"),
         },
       });
       return res.status(201).json({ success: true, workTime });
@@ -42,7 +44,7 @@ const handler = async (
       const isTimeExist = await client.workTimes.findFirst({
         where: {
           userId: req.session.user!.id,
-          id: start,
+          id: +start,
         },
       });
       if (!isTimeExist) return res.status(400).json({ success: false });
@@ -52,7 +54,7 @@ const handler = async (
           id: isTimeExist.id,
         },
         data: {
-          end: new Date(end),
+          end: getCurDateInServer(end),
           duration,
         },
       });

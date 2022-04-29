@@ -91,3 +91,9 @@ export const getAvatar = (size: number) => {
 
 export const avatarUrlMaker = (id: string) =>
   `https://imagedelivery.net/0ZP-N9B45ji28JoChYUvWw/${id}/avatar`;
+
+export const getCurDateInClient = (date: string | number) => {
+  const timeZoneOffset = new Date(date).getTimezoneOffset();
+  const curTime = new Date(date).getTime() + timeZoneOffset * 1000 * 60;
+  return new Date(curTime);
+};

@@ -31,7 +31,7 @@ export type StartWorkRequest = {
 };
 
 export type EndWorkRequest = {
-  start: number;
+  start: string | number;
   end: string;
   duration: number;
 };

@@ -6,7 +6,7 @@ import { pageTake } from "@libs/server/constants";
 import { getCanStartTime } from "@libs/server/utils";
 import { GetRecordRequest } from "@libs/client/types/dataTypes";
 import { GetRecordResponse } from "@libs/server/types/dataTypes";
-import { format, set, addDays } from "date-fns";
+import { addDays } from "date-fns";
 
 const handler = async (
   req: NextApiRequest,
@@ -49,7 +49,7 @@ const handler = async (
       afterDate && {
         createdAt: {
           gte: new Date(beforeDate),
-          lte: addDays(new Date(afterDate), 2),
+          lte: addDays(new Date(afterDate), 1),
         },
       }),
     ...(beforeDate &&
