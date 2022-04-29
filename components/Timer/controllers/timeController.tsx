@@ -14,7 +14,6 @@ const useTimeController = () => {
 
   useEffect(() => {
     if (timerStatus === "end" && startTime) {
-      //problem
       const startDate = new Date(startTime);
       if (!isNaN(startDate.getTime())) {
         const [h, m, s] = getDistanceTime(startDate);

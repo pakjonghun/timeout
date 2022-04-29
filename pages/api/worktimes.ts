@@ -7,7 +7,6 @@ import withCookie from "@libs/server/withCookie";
 import { getCanStartTime } from "@libs/server/utils";
 import { WorkTimeResponse } from "@libs/server/types/dataTypes";
 import { format } from "date-fns";
-import { getTimezoneOffset, utcToZonedTime } from "date-fns-tz";
 
 const handler = async (
   req: NextApiRequest,

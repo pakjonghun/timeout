@@ -16,7 +16,7 @@ export type WorkTimeResponse = {
 
 export type MyStatusResponse = {
   user?: Pick<Users, "status" | "id"> & {
-    startTime?: Pick<WorkTimes, "id" | "start">;
+    startTime?: { id: number; start: string };
   };
 } & CommonResponse;
 

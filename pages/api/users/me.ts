@@ -40,7 +40,13 @@ const handler = async (
       if (startTime.length) {
         return res.json({
           success: true,
-          user: { ...user, startTime: startTime[0] },
+          user: {
+            ...user,
+            startTime: {
+              ...startTime[0],
+              start: startTime[0].start.toString(),
+            },
+          },
         });
       } else {
         await client.users.update({

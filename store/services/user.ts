@@ -1,3 +1,4 @@
+import { getCurDateInServer } from "./../../libs/server/utils";
 import { endTimer } from "@store/reducer/workTime";
 import { setStartTime, startTimer } from "@store/reducer/workTime";
 import {
@@ -71,11 +72,15 @@ export const user = api.injectEndpoints({
           switch (user?.status) {
             case "WORKING":
               if (user?.startTime) {
+                const cur = new Date(
+                  new Date(user.startTime.start).getTime() - 9 * 1000 * 60 * 60
+                );
+
                 api.dispatch(startTimer());
                 api.dispatch(
                   setStartTime({
                     ...user.startTime,
-                    start: user.startTime.start.toString(),
+                    start: cur.toString(),
                   })
                 );
               } else {
