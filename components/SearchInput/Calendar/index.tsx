@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { NextPage } from "next";
-import CalendarTHead from "@components/SearchInput/Calendar/Thead";
+import CalendarThead from "@components/SearchInput/Calendar/Thead";
 import CalendarHeader from "@components/SearchInput/Calendar/Header";
 import CalendarBody from "@components/SearchInput/Calendar/CalendarBody";
 import { getMonthDateList } from "@libs/client/utils";
@@ -76,7 +76,7 @@ const Calendar: NextPage<props> = ({
           year={year}
           month={month}
         />
-        <CalendarTHead data={dayList} />
+        <CalendarThead data={dayList} />
         {monthDateList.map((v, i) => (
           <CalendarBody
             selectType={selectType}
