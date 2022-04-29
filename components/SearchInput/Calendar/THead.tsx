@@ -4,7 +4,7 @@ interface props {
   data: string[];
 }
 
-const CalendarTHead: NextPage<props> = ({ data }) => {
+const Thead: NextPage<props> = ({ data }) => {
   return (
     <div className="grid grid-cols-7 text-sm text-gray-400 select-none">
       {data.map((v) => (
@@ -16,4 +16,4 @@ const CalendarTHead: NextPage<props> = ({ data }) => {
   );
 };
 
-export default CalendarTHead;
+export default Thead;

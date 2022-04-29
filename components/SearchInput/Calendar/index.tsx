@@ -4,10 +4,10 @@ import CalendarThead from "@components/SearchInput/Calendar/Thead";
 import CalendarHeader from "@components/SearchInput/Calendar/Header";
 import CalendarBody from "@components/SearchInput/Calendar/CalendarBody";
 import { getMonthDateList } from "@libs/client/utils";
-import { motion, AnimatePresence } from "framer-motion";
 import { useAppDispatch } from "@libs/client/useRedux";
 import { CalendarSelect } from "@libs/client/types";
 import { resetDates } from "@store/reducer/search";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface props {
   isCaneldarShow: boolean;
