@@ -13,7 +13,7 @@ const useTimeController = () => {
   const startTime = useAppSelector((state) => state.workTime.startTime?.start);
 
   useEffect(() => {
-    if (startTime) {
+    if (timerStatus === "end" && startTime) {
       const startDate = new Date(startTime);
       if (!isNaN(startDate.getTime())) {
         const [h, m, s] = getDistanceTime(new Date(startTime));
@@ -22,7 +22,15 @@ const useTimeController = () => {
         setSecond(s);
       }
     }
-  }, [startTime]);
+  }, [timerStatus, startTime]);
+
+  useEffect(() => {
+    if (timerStatus === "start") {
+      setHour(0);
+      setMinute(0);
+      setSecond(0);
+    }
+  }, [timerStatus]);
 
   useEffect(() => {
     if (timerStatus === "end") {

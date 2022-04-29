@@ -1,5 +1,5 @@
 import { api, Tags } from "./index";
-import { tagMaker } from "../../libs/client/utils";
+import { getId, tagMaker } from "../../libs/client/utils";
 import {
   WorkTimesResponseTimes,
   WorkTimeResponse,
@@ -9,7 +9,7 @@ import {
   EndWorkRequest,
 } from "../../libs/client/types/dataTypes";
 import { Draft } from "@reduxjs/toolkit";
-import { endTimer, startTimer } from "@store/reducer/workTime";
+import { endTimer, setStartTime, startTimer } from "@store/reducer/workTime";
 
 type TempTimerDraftType = {
   success: boolean;
@@ -36,6 +36,14 @@ const workTime = api.injectEndpoints({
       }),
       async onQueryStarted({ start }, { dispatch, queryFulfilled }) {
         dispatch(startTimer());
+
+        dispatch(
+          setStartTime({
+            id: 6001244232334,
+            start,
+          })
+        );
+
         const patched = dispatch(
           api.util.updateQueryData(
             //@ts-ignore
@@ -55,7 +63,15 @@ const workTime = api.injectEndpoints({
           const {
             data: { workTime },
           } = await queryFulfilled;
+
           if (workTime) {
+            dispatch(
+              setStartTime({
+                id: workTime.id,
+                start: workTime.start.toString(),
+              })
+            );
+
             dispatch(
               api.util.updateQueryData(
                 //@ts-ignore
@@ -69,13 +85,14 @@ const workTime = api.injectEndpoints({
           } else {
             patched.undo();
             dispatch(endTimer());
+            dispatch(setStartTime(null));
           }
         } catch {
           patched.undo();
           dispatch(endTimer());
+          dispatch(setStartTime(null));
         }
       },
-      invalidatesTags: ["MyStatus"],
     }),
 
     endWork: build.mutation<WorkTimeResponse, EndWorkRequest>({
@@ -104,6 +121,8 @@ const workTime = api.injectEndpoints({
             data: { success },
           } = await queryFulfilled;
 
+          if (success) dispatch(setStartTime(null));
+
           if (!success) {
             patched.undo();
             dispatch(startTimer());
@@ -113,7 +132,6 @@ const workTime = api.injectEndpoints({
           dispatch(startTimer());
         }
       },
-      invalidatesTags: ["MyStatus"],
     }),
   }),
 });
