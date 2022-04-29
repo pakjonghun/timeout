@@ -30,7 +30,6 @@ interface form {
 }
 
 const EditProfileModal: NextPage<props> = ({ isShow, onClose }) => {
-  const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const { data: me, isSuccess } = useGetMeQuery("");
   const [avatarPrevies, setAvatarPreview] = useState("");
@@ -88,7 +87,7 @@ const EditProfileModal: NextPage<props> = ({ isShow, onClose }) => {
 
   const onValid = useCallback(
     async (values: form) => {
-      onClose();
+      // onClose();
       if (values.avatar && values.avatar.length) {
         try {
           setIsLoading(true);
@@ -116,6 +115,7 @@ const EditProfileModal: NextPage<props> = ({ isShow, onClose }) => {
               setIsLoading(false);
               return toast.error("파일 업로드가 실패했습니다.");
             }
+
             const body = {
               id: me!.user!.id,
               ...(values.name && { name: values.name }),
@@ -123,7 +123,9 @@ const EditProfileModal: NextPage<props> = ({ isShow, onClose }) => {
               ...(values.email && { email: values.email }),
               ...(values.avatar && { avatar: imageId }),
             };
+
             updateProfileMutate(body);
+            onClose();
           } else {
             setIsLoading(false);
             toast.error("파일 업로드가 실했습니다.");
