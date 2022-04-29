@@ -45,7 +45,7 @@ const Search = () => {
                 classes={joinStyleClass(
                   "grid w-full space-y-3",
                   userRole === "ADMIN"
-                    ? "grid-rows-[minmax(3.5rem,5vh),minmax(10rem,54vh),minmax(4rem,5vh)]"
+                    ? "grid-rows-[minmax(3.5rem,4vh),minmax(15rem,50vh),minmax(4rem,4vh)]"
                     : "grid-rows-[70vh,4vh]"
                 )}
               />
