@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useAppSelector } from "@libs/client/useRedux";
 import { getCurDateInClient, getHourMinuteSecond } from "@libs/client/utils";
-import { format } from "date-fns";
-import { getCurDate } from "@libs/server/utils";
 
 const useTimeController = () => {
   const interval = useRef<NodeJS.Timer[]>([]);
