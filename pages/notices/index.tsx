@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { GetStaticProps, NextPage } from "next";
 import Layout from "@components/Layout";
 import PostRow from "@components/Row/PostRow";
 import HeaderRow from "@components/Row/HeaderRow";
@@ -6,7 +7,6 @@ import AddPostModal from "@components/Modals/AddPostModal";
 import client from "@libs/server/client";
 import useModal from "@libs/client/useModal";
 import { postThead } from "@libs/client/constants";
-import { GetStaticProps, NextPage } from "next";
 import { Posts, Users } from "@prisma/client";
 
 interface IWithUserPosts extends Posts {
