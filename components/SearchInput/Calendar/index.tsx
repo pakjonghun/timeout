@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { NextPage } from "next";
-import CalendarTHead from "./Thead";
-import CalendarHeader from "./Header";
-import CalendarBody from "./CalendarBody";
+import CalendarTHead from "@components/SearchInput/Calendar/Thead";
+import CalendarHeader from "@components/SearchInput/Calendar/Header";
+import CalendarBody from "@components/SearchInput/Calendar/CalendarBody";
 import { getMonthDateList } from "@libs/client/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAppDispatch } from "@libs/client/useRedux";
