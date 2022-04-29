@@ -39,14 +39,14 @@ const handler = async (
     const authToken = process.env.TWILO_TOKEN;
     const messenger = require("twilio")(accountSid, authToken);
     const phoneNumber = `+82${phone.replace(/-/g, "").trim()}`;
-    messenger.messages
-      .create({
-        body: authKey,
-        messagingServiceSid: process.env.TWILO_TIMEOUT_SID,
-        to: phoneNumber,
-      })
-      .then((message: any) => console.log(message.sid))
-      .catch((err: unknown) => console.log(err));
+    // messenger.messages
+    //   .create({
+    //     body: authKey,
+    //     messagingServiceSid: process.env.TWILO_TIMEOUT_SID,
+    //     to: phoneNumber,
+    //   })
+    //   .then((message: any) => console.log(message.sid))
+    //   .catch((err: unknown) => console.log(err));
   }
 
   res.status(201).json({ success: true });

@@ -83,7 +83,7 @@ export const queryMaker = (args: { key: string; value: string | number }[]) => {
 };
 
 export const getAvatar = (size: number) => {
-  return `http://${gravatar.url("name", {
+  return `https://${gravatar.url("name", {
     s: size + "" || "34",
     d: "retro",
   })}`;

@@ -14,7 +14,7 @@ const option = {
   cookieName: "authorization",
   password: process.env.COOKIE_PASSWORD!,
   cookieOptions: {
-    httpOnly: true,
+    httpsOnly: true,
     maxAge: 60 * 60 * 24 * 7,
   },
 };

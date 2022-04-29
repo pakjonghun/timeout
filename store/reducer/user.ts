@@ -10,7 +10,7 @@ type UserState = {
 
 const initialState: UserState = {
   role: null,
-  avatar: `http://${gravatar.url("name", {
+  avatar: `https://${gravatar.url("name", {
     s: "32",
     d: "retro",
   })}`,
