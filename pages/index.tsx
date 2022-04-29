@@ -44,7 +44,7 @@ const Home = () => {
   const onConfirmClick = useCallback(() => {
     if (!startTime) {
       onHideModal();
-      toast.error("시작시간이 없습니다.");
+      toast.error("시작시간이 입력되지 않았습니다.");
       return;
     }
     const [_, end, duration] = getStartEndDuration(startTime.start);
@@ -89,6 +89,7 @@ export default Home;
 
 function getStartEndDuration(startTime: string): [string, string, number] {
   const start = new Date(startTime);
+
   const end = new Date();
   const duration = end.getTime() - start.getTime();
 

@@ -1,5 +1,5 @@
 import { api, Tags } from "./index";
-import { getId, tagMaker } from "../../libs/client/utils";
+import { tagMaker } from "../../libs/client/utils";
 import {
   WorkTimesResponseTimes,
   WorkTimeResponse,
@@ -66,7 +66,7 @@ const workTime = api.injectEndpoints({
             dispatch(
               setStartTime({
                 id: workTime.id,
-                start: workTime.start.toString(),
+                start,
               })
             );
 

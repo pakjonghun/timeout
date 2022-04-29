@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { getHourMinuteSecond } from "@libs/client/utils";
 import { useAppSelector } from "@libs/client/useRedux";
-import { getCurDateInClient, getHourMinuteSecond } from "@libs/client/utils";
 
 const useTimeController = () => {
   const interval = useRef<NodeJS.Timer[]>([]);
@@ -14,7 +14,8 @@ const useTimeController = () => {
 
   useEffect(() => {
     if (timerStatus === "end" && startTime) {
-      const startDate = getCurDateInClient(startTime);
+      //problem
+      const startDate = new Date(startTime);
       if (!isNaN(startDate.getTime())) {
         const [h, m, s] = getDistanceTime(startDate);
         setHour(h);

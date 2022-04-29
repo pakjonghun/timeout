@@ -55,8 +55,8 @@ const EditRecordModal: NextPage<props> = () => {
 
       const payload = {
         id: selectedData.id,
-        start: start.toString(),
-        ...(end && { end: end.toString() }),
+        start: start.toISOString(),
+        ...(end && { end: end.toISOString() }),
         ...(duration && { duration: duration }),
       };
 
