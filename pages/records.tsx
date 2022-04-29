@@ -17,7 +17,7 @@ const Record = () => {
         classes={joinStyleClass(
           "grid w-full mt-10",
           userRole === "ADMIN"
-            ? "grid-rows-[6vh,60vh,3vh]"
+            ? "grid-rows-[5vh,55vh,5vh]"
             : "grid-rows-[70vh,3vh]"
         )}
       />

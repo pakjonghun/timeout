@@ -76,7 +76,7 @@ const RecordTable = () => {
   }
 
   return (
-    <ul className="px-5 relative pb-10 divide-y-[1px] mt-2 max-h-[80vh] text-sm rounded-md overflow-y-auto">
+    <ul className="px-5 relative pb-10 divide-y-[1px] mt-2 max-h-[70vh] text-sm rounded-md overflow-y-auto">
       <HeaderRow
         thead={userRole === "ADMIN" ? theads.adminThead : theads.userThead}
         isSelected={
