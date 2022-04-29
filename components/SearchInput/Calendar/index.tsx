@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { NextPage } from "next";
-import CalendarThead from "./Thead";
+import CalendarThead from "@components/SearchInput/Calendar/CalendarThead";
 import CalendarHeader from "@components/SearchInput/Calendar/Header";
 import CalendarBody from "@components/SearchInput/Calendar/CalendarBody";
 import { getMonthDateList } from "@libs/client/utils";
