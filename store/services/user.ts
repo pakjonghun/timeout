@@ -63,9 +63,7 @@ export const user = api.injectEndpoints({
     getStatus: build.query<MyStatusResponse, void>({
       queryFn: async (_, api, __, fetch) => {
         try {
-          const result = await fetch(
-            "http://localhost:3000/api/users/me?status=1"
-          );
+          const result = await fetch("users/me?status=1");
 
           const { user } = result.data as MyStatusResponse;
           switch (user?.status) {
