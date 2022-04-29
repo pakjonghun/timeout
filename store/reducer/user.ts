@@ -6,6 +6,7 @@ type UserState = {
   role: Role | null;
   avatar?: string;
   name?: string;
+  isMyStatusLoading: boolean;
 };
 
 const initialState: UserState = {
@@ -14,6 +15,7 @@ const initialState: UserState = {
     s: "32",
     d: "retro",
   })}`,
+  isMyStatusLoading: false,
 };
 
 const userSlice = createSlice({
@@ -26,10 +28,22 @@ const userSlice = createSlice({
     setAvatar: (state, { payload }: PayloadAction<string>) => {
       state.avatar = payload;
     },
+    setMyStatusLoading: (state) => {
+      state.isMyStatusLoading = true;
+    },
+    setMyStatusNotLoading: (state) => {
+      state.isMyStatusLoading = false;
+    },
     reset: (state) => {
       state = initialState;
     },
   },
 });
-export const { reset, setRole, setAvatar } = userSlice.actions;
+export const {
+  setMyStatusLoading,
+  setMyStatusNotLoading,
+  reset,
+  setRole,
+  setAvatar,
+} = userSlice.actions;
 export default userSlice.reducer;

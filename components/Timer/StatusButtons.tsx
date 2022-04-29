@@ -5,9 +5,17 @@ import { joinStyleClass } from "@libs/client/utils";
 import { useAppSelector } from "@libs/client/useRedux";
 import { useStartWorkMutation } from "@store/services/timerWorkTime";
 import { toast } from "react-toastify";
+import { NextPage } from "next";
 
-const StatusButtons = () => {
+interface props {
+  isEndLoading: boolean;
+}
+
+const StatusButtons: NextPage<props> = ({ isEndLoading }) => {
   const { onShowModal } = useModal("confirmTimer");
+  const isMyStatusLoading = useAppSelector(
+    (state) => state.user.isMyStatusLoading
+  );
   const timeoutStatus = useAppSelector((state) => state.workTime.timerStatus);
   const [startWorkMutation, { isError, data, isLoading }] =
     useStartWorkMutation();
@@ -30,7 +38,7 @@ const StatusButtons = () => {
       )}
     >
       <StatusButton
-        isLoading={isLoading}
+        isLoading={isLoading || isEndLoading || isMyStatusLoading}
         onClickTimerButton={onClickTimerButton}
       />
     </div>

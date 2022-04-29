@@ -19,7 +19,8 @@ const Home = () => {
   const { onHideModal } = useModal("confirmTimer");
   const startTime = useAppSelector((state) => state.workTime.startTime);
 
-  const [endWorkMutate, { isError }] = useEndWorkMutation();
+  const [endWorkMutate, { isError, isLoading: isEndLoading }] =
+    useEndWorkMutation();
   const { isError: isStatusError, data } = useGetStatusQuery();
   const { data: workTimes } = useGetTimerWorkTimesQuery();
   const timerRecordThead = useAppSelector(
@@ -69,7 +70,7 @@ const Home = () => {
           message={`누적시간은 ${duration} 입니다.`}
           onConfirm={onConfirmClick}
         />
-        <Timer>
+        <Timer isEndLoading={isEndLoading}>
           {!!workTimes?.workTimes && (
             <ul className="w-[17rem] max-h-96 mx-auto overflow-y-auto divide-y-[1px]">
               <HeaderRow thead={timerRecordThead} size="xs" />

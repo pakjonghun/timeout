@@ -6,14 +6,15 @@ import useTimeController from "./controllers/timeController";
 
 interface props {
   children: React.ReactNode;
+  isEndLoading: boolean;
 }
 
-const Timer: NextPage<props> = ({ children }) => {
+const Timer: NextPage<props> = ({ children, isEndLoading }) => {
   const [hour, minute, second] = useTimeController();
 
   return (
     <div className="grid grid-rows-[2fr,minmax(6rem,1fr),3fr] place-content-center">
-      <StatusButtons />
+      <StatusButtons isEndLoading={isEndLoading} />
       <div className="relative -top-20 flex flex-col items-center justify-center self-start">
         <TimeLine hour={hour} minute={minute} second={second} />
         <StatusMessages />

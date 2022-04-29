@@ -12,6 +12,7 @@ import {
 } from "./../../libs/client/types/dataTypes";
 import { api } from "./index";
 import { Users } from "@prisma/client";
+import { setMyStatusLoading, setMyStatusNotLoading } from "@store/reducer/user";
 
 export const user = api.injectEndpoints({
   endpoints: (build) => ({
@@ -63,6 +64,7 @@ export const user = api.injectEndpoints({
     getStatus: build.query<MyStatusResponse, void>({
       queryFn: async (_, api, __, fetch) => {
         try {
+          api.dispatch(setMyStatusLoading());
           const result = await fetch("users/me?status=1");
 
           const { user } = result.data as MyStatusResponse;
@@ -87,9 +89,10 @@ export const user = api.injectEndpoints({
             default:
               return { data: { success: false } };
           }
-
+          api.dispatch(setMyStatusNotLoading());
           return { data: { success: true } };
         } catch (err) {
+          api.dispatch(setMyStatusNotLoading());
           return { data: { success: false } };
         }
       },
