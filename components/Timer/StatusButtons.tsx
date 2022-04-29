@@ -2,12 +2,11 @@ import { memo, useCallback, useEffect } from "react";
 import StatusButton from "./StatusButton";
 import useModal from "@libs/client/useModal";
 import { joinStyleClass } from "@libs/client/utils";
-import { useAppDispatch, useAppSelector } from "@libs/client/useRedux";
+import { useAppSelector } from "@libs/client/useRedux";
 import { useStartWorkMutation } from "@store/services/timerWorkTime";
 import { toast } from "react-toastify";
 
 const StatusButtons = () => {
-  const dispatch = useAppDispatch();
   const { onShowModal } = useModal("confirmTimer");
   const timeoutStatus = useAppSelector((state) => state.workTime.timerStatus);
   const [startWorkMutation, { isError, data }] = useStartWorkMutation();
@@ -15,7 +14,7 @@ const StatusButtons = () => {
   useEffect(() => {
     if (isError) toast.error("초과근무 시작을 실패했습니다..");
     if (data && !data.success) toast.error("초과근무 시작을 실패했습니다..");
-  }, [isError, data, dispatch]);
+  }, [isError, data]);
 
   const onClickTimerButton = useCallback(() => {
     if (timeoutStatus === "end") return onShowModal();

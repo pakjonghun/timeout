@@ -9,6 +9,7 @@ import {
   EndWorkRequest,
 } from "../../libs/client/types/dataTypes";
 import { Draft } from "@reduxjs/toolkit";
+import { endTimer, startTimer } from "@store/reducer/workTime";
 
 type TempTimerDraftType = {
   success: boolean;
@@ -34,6 +35,7 @@ const workTime = api.injectEndpoints({
         url: "worktimes",
       }),
       async onQueryStarted({ start }, { dispatch, queryFulfilled }) {
+        dispatch(startTimer());
         const patched = dispatch(
           api.util.updateQueryData(
             //@ts-ignore
@@ -64,9 +66,13 @@ const workTime = api.injectEndpoints({
                 }
               )
             );
-          } else patched.undo();
+          } else {
+            patched.undo();
+            dispatch(endTimer());
+          }
         } catch {
           patched.undo();
+          dispatch(endTimer());
         }
       },
       invalidatesTags: ["MyStatus"],
@@ -79,6 +85,7 @@ const workTime = api.injectEndpoints({
         url: "worktimes",
       }),
       async onQueryStarted({ end, duration }, { dispatch, queryFulfilled }) {
+        dispatch(endTimer());
         const patched = dispatch(
           api.util.updateQueryData(
             //@ts-ignore
@@ -97,9 +104,13 @@ const workTime = api.injectEndpoints({
             data: { success },
           } = await queryFulfilled;
 
-          if (!success) patched.undo();
+          if (!success) {
+            patched.undo();
+            dispatch(startTimer());
+          }
         } catch {
           patched.undo();
+          dispatch(startTimer());
         }
       },
       invalidatesTags: ["MyStatus"],
